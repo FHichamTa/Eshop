@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -6,7 +7,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 flex justify-between">
         <Link href="/">Home</Link>
         <div>
-          <span>Mon panier</span>
+          <ShoppingCart />
         </div>
       </div>
     </nav>
