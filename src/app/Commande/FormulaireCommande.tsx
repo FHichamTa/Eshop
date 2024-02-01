@@ -1,4 +1,6 @@
 import React from "react"
+import { useRef } from "react"
+
 
 const Country = [
   { value: "it", label: "France" },
@@ -64,6 +66,15 @@ export default function App() {
     errors,
   } = state
 
+    const nameInputRef = useRef<HTMLInputElement>(null)
+    const emailInputRef = useRef<HTMLInputElement>(null)
+    const countryInputRef = useRef<HTMLSelectElement>(null)
+    const phoneInputRef = useRef<HTMLInputElement>(null)
+    const cityInputRef = useRef<HTMLInputElement>(null)
+    const adressInputRef = useRef<HTMLInputElement>(null)
+    const postalcodeInputRef = useRef<HTMLInputElement>(null)
+    const deliverytypeInputRef = useRef<HTMLInputElement>(null)
+
   function update(newState: Partial<FormState>) {
     setState((prevState) => ({
       ...prevState,
@@ -83,6 +94,14 @@ export default function App() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const enteredName = nameInputRef.current?.value
+    const enteredEmail = emailInputRef.current?.value
+    const enteredCountry = countryInputRef.current?.value
+    const enteredPhone = phoneInputRef.current?.value
+    const enteredCity = cityInputRef.current?.value
+    const enteredAdress = adressInputRef.current?.value
+    const enteredPostalcode = postalcodeInputRef.current?.value
+    const enteredDeliverytype = deliverytypeInputRef.current?.value
     update({ errors: {} })
     if (!name) {
       setErrors({ name: "Veuillez renseigner votre nom et prénom" })
@@ -147,6 +166,7 @@ export default function App() {
         <input
           required
           id={nameId}
+          ref={nameInputRef}
           value={name}
           placeholder="Jean Dupont"
           onChange={(event) => {
@@ -161,6 +181,7 @@ export default function App() {
         <input
           required
           id={emailId}
+          ref={emailInputRef}
           type="email"
           value={email}
           placeholder="jean.dupont@gmail.com"
@@ -172,9 +193,11 @@ export default function App() {
         {!!errors.email && <div className="form-error">{errors.email}</div>}
         </div>
         <div>
+        <label htmlFor={emailId}>Numéro de téléphone</label>
         <input
             required
             id={phoneId}
+            ref={phoneInputRef}
             type="tel" 
             value={phone}
             placeholder="0642915834" 
@@ -192,6 +215,7 @@ export default function App() {
         <select
             required
             id={countryId}
+            ref={countryInputRef}
             value={country}
             onChange={(event) => update({ country: event.target.value })}
         >
@@ -202,10 +226,11 @@ export default function App() {
           ))}
         </select>
         <div>
-        <label htmlFor={cityId}>Adresse mail</label>
+        <label htmlFor={cityId}>Ville</label>
         <input
           required
           id={cityId}
+          ref={cityInputRef}
           value={city}
           placeholder="Paris"
           onChange={(event) => {
@@ -216,10 +241,11 @@ export default function App() {
         {!!errors.city && <div className="form-error">{errors.city}</div>}
         </div>
         <div>
-        <label htmlFor={adress}>Adresse mail</label>
+        <label htmlFor={adress}>Adresse</label>
         <input
           required
           id={adressId}
+          ref={adressInputRef}
           value={adress}
           placeholder="5 Rue des Lilas"
           onChange={(event) => {
@@ -234,6 +260,7 @@ export default function App() {
         <input
           required
           id={postalcodeId}
+          ref={postalcodeInputRef}
           value={postalcode}
           placeholder="5 Rue des Lilas"
           onChange={(event) => {
@@ -269,6 +296,7 @@ export default function App() {
               name="deliverytype"
               id={value}
               value={value}
+              ref={deliverytypeInputRef}
               checked={deliverytype === value}
               onChange={(event) =>
                 update({ deliverytype: event.target.value })
