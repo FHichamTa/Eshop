@@ -41,7 +41,7 @@ export default async function Home() {
                 <h1>{product.models.name}</h1>
                 <img className="w-full h-full object-cover"
                   alt={`Shoe image for product id ${product.id}`}
-                  src={product.productImages[0].url} />
+                  src={product.productImages[0]?.url} />
               </div>
             </li>
           ))}
