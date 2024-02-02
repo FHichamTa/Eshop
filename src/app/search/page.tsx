@@ -1,7 +1,7 @@
+"use client"
 import { useState, Dispatch, SetStateAction } from "react";
-import "./global.css";
-import { SearchBar } from "./searchbar"
-import { ResultsList } from "./ResultsList"
+import { SearchBar } from "../searchbar"
+import { ResultsList } from "../ResultsList"
 import Link from 'next/link';
 
 function Search() {
@@ -11,7 +11,7 @@ function Search() {
     <div className="Search">
       <div>
         <button>
-          <Link href="/page">Home</Link>
+          <Link href="/">Home</Link>
         </button>
         </div>
       <div className="search-bar-container">
