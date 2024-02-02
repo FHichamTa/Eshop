@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import Image from "next/image";
 import { cookies } from "next/headers";
+import Navbar from "./navbar";
 import Link from 'next/link';
 
 
@@ -25,6 +26,7 @@ export default async function Home() {
 
   return (
     <main>
+      <Navbar /> {/* Include the Navbar component here */}
       <div className="relative h-45 w-90">
         <div className="absolute top-43 right-0 h-45 w-45">
           <div className="flex w-max items-end gap-4">
