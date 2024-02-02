@@ -13,7 +13,7 @@ const Country = [
 
 const DeliveryType = [
   { value: "standard", label: "Standard delivery (Free)" },
-  { value: "express", label: "Epress delivery (€5,00" },
+  { value: "express", label: "Epress delivery (€5,00)" },
 ]
 
 const PhoneNumber = 10
