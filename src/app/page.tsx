@@ -22,7 +22,8 @@ export default async function Home() {
 
   const products = await supabase
     .from("products")
-    .select("*, productImages(*), types(name)");
+    .select("*, productImages(*), types(name)")
+    .range(0, 2)
 
   return (
     <main>
@@ -32,7 +33,8 @@ export default async function Home() {
           <div className="flex w-max items-end gap-4">
           </div>
         </div>
-      </div><div className="flex min-h-screen flex-col items-center justify-between p-24">
+      </div>
+      <div className="flex min-h-screen flex-col items-center justify-between p-24">
         <ul className="flex gap-4">
           {products.data?.map((product) => (
             <Link href={`/${product.id}`} key={product.id}>
