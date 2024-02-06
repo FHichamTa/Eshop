@@ -1,7 +1,11 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
-import Image from "next/image";
 import { cookies } from "next/headers";
 import Navbar from "./navbar";
+import React from "react";
+import CarouselImage from './carousel';
+export default async function Home() {
+  const cookieStore = cookies();
+
 import Link from 'next/link';
 
 
@@ -25,31 +29,36 @@ export default async function Home() {
     .select("*, productImages(*), types(name)")
     .range(0, 2)
 
+//console.log("Product", JSON.stringify(products))
   return (
-    <main>
-      <Navbar /> {/* Include the Navbar component here */}
-      <div className="relative h-45 w-90">
-        <div className="absolute top-43 right-0 h-45 w-45">
-          <div className="flex w-max items-end gap-4">
-          </div>
-        </div>
+    <>
+
+      <div>
+        <Navbar />
+        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <div className="y-2">
+        <div>
+      <CarouselImage />
+    </div>
+        
       </div>
-      <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <ul className="flex gap-4">
-          {products.data?.map((product) => (
-            <Link href={`/${product.id}`} key={product.id}>
-              <li>
-                <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[250px]">
-                  <h1>{product.types.name}</h1>
-                  <img className="w-full h-full object-cover"
-                    alt={`Shoe image for product id ${product.id}`}
-                    src={product.productImages[0]?.url} />
-                </div>
-              </li>
-            </Link>
-          ))}
-        </ul>
+      <ul className="flex gap-4 relative top-[-40px]">
+  {products.data?.map((product) => (
+    <li key={product.id} className="flex items-center">
+      <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[250px] flex flex-col items-center justify-center">
+        <h1 className="text-center">{product.models.name}</h1>
+        <img
+          className="w-full h-full object-cover"
+          alt={`Shoe image for product id ${product.id}`}
+          src={product.productImages[0]?.url}
+        />
       </div>
-    </main>
+    </li>
+  ))}
+</ul>
+        </main>
+      </div>
+    </>
   );
+}
 }

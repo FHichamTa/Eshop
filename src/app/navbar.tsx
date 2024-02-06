@@ -1,75 +1,23 @@
-"use client";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
-import { FaSearch } from "react-icons/fa";
 import React from "react";
-import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
 
 const Navbar = () => {
-
-  const menuItems = [
-    { value: "search", label: "Search", href: "/search" },
-    { value: "cart", label: "Cart", href: "/commande" },
-    { value: "store", label: "Store", href: "/store" },
-    { value: "home", label: "Home", href: "/" },
-  ];
-
   return (
-    <nav className="border-b shadow-md py-4">
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-        <div>
-          <Menu>
-            {({ open }) => (
-              <>
-                <Menu.Button>Menu</Menu.Button>
-                <Transition
-                  show={open}
-                  as={Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 scale-95"
-                  enterTo="opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="opacity-100 scale-100"
-                  leaveTo="opacity-0 scale-95"
-                >
-                  <Menu.Items static className="origin-top absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1">
-                      {menuItems.map((item) => (
-                        <Menu.Item key={item.value}>
-                          {({ active }) => (
-                            <Link
-                              href={item.href}
-                              className={`${active ? 'bg-blue-500 text-white' : 'text-gray-700'
-                                } block px-4 py-2 text-sm`}
-                            >
-                              {item.label}
-                            </Link>
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </>
-            )}
-          </Menu>
-        </div>
-        <Link href="/">ESHOP</Link>
-        <div className="flex items-center">
-          <Link href="/commande">
-            <div className="flex items-center">
-              <ShoppingCart className="mr-5" />
-            </div>
+    <nav className="border-b shadow-md py-4 fixed w-full top-0 bg-white z-50">
+      <div className="max-w-7xl mx-auto px-4 flex justify-between">
+        <Link href="Eshop/.next/src/app/page"><img className="h-16 w-16" src="data:image/png;base64,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">
+          </img>
           </Link>
-          <Link href="/search">
-            <div className="flex items-center">
-              <FaSearch className="mr-5" />
-            </div>
+        <div>
+          <Link href="">
+          <ShoppingCart />
           </Link>
         </div>
       </div>
+      <div className="text-center mx-auto"> SneakerStore</div>
     </nav>
   );
-}
+};
+
 export default Navbar;
