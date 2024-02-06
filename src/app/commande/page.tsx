@@ -202,7 +202,7 @@ export default function App() {
         )}
       </div>
       <div>
-        <label htmlFor={countryId} className="block text-sm font-bold text-gray-700 mb-2">Pays</label>
+        <label htmlFor={countryId}>Pays</label>
         <select
           required
           id={countryId}
