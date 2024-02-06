@@ -6,6 +6,11 @@ import CarouselImage from './carousel';
 export default async function Home() {
   const cookieStore = cookies();
 
+import Link from 'next/link';
+
+
+export default async function Home() {
+  const cookieStore = cookies();
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -18,9 +23,11 @@ export default async function Home() {
     }
   );
 
+
   const products = await supabase
     .from("products")
-    .select("*, productImages(*), models(name)");
+    .select("*, productImages(*), types(name)")
+    .range(0, 2)
 
 //console.log("Product", JSON.stringify(products))
   return (
@@ -53,4 +60,5 @@ export default async function Home() {
       </div>
     </>
   );
+}
 }
